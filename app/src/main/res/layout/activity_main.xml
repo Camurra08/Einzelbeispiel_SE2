@@ -7,20 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="167dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="537dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="136dp"
         android:text="Gib deine Matrikelnummer ein"
+
         android:textColorHint="#833030"
         android:textColorLink="#653F3F"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,8 +26,8 @@
         android:id="@+id/etMatrikelnummer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="101dp"
-        android:layout_marginBottom="448dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="512dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="116dp"
-        android:layout_marginBottom="396dp"
+        android:layout_marginBottom="488dp"
         android:text="Antwort vom Server"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,13 +48,13 @@
         android:id="@+id/btnClientConnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="128dp"
-        android:layout_marginBottom="224dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="503dp"
         android:onClick="onClickConnect"
         android:text="Abschicken"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvRectxt"
@@ -71,5 +69,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="121dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="551dp"
+        android:onClick="onClickCalculate"
+        android:text="ggT>1"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="438dp"
+        android:layout_height="136dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="660dp"
+        android:background="@drawable/custom_shapes"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.598" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="45dp"
+        android:text="NetworkTest"
+        android:textColor="#FFFBFB"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

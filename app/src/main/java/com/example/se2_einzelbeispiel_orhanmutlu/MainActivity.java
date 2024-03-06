@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnClientConnect;
     private final String serverName = "se2-submission.aau.at";
     private final int serverPort = 20080;
+    private Button btnCalculate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         tvReceivedData = findViewById(R.id.tvRectxt);
         etStudentnumber = findViewById(R.id.etMatrikelnummer);
         btnClientConnect = findViewById(R.id.btnClientConnect);
+        btnCalculate = findViewById(R.id.button2);
 
 
     }
@@ -43,6 +45,74 @@ public class MainActivity extends AppCompatActivity {
     public void onClickConnect(View view) {
         String matriculationNumber = etStudentnumber.getText().toString();
         sendToServer(matriculationNumber);
+    }
+    public void onClickCalculate(View view) {
+        String matriculationNumber = etStudentnumber.getText().toString();
+        calculateAndDisplayResult(matriculationNumber);
+
+    }
+    private void calculateAndDisplayResult(String matriculationNumber) {
+        try {
+
+            int moduloResult = Integer.parseInt(matriculationNumber) % 7;
+
+            // Überprüfen Sie, ob es Ziffern in der Matrikelnummer mit einem gemeinsamen Teiler > 1 gibt
+            String result = findPairsWithCommonFactor(matriculationNumber);
+
+            // Ergebnis ausgeben
+            String output = "Modulo 7: " + moduloResult + "\n" + result;
+            tvReceivedData.setText(output);
+
+        } catch (NumberFormatException e) {
+            tvReceivedData.setText("Ungültige Matrikelnummer");
+        }
+    }
+    private String findPairsWithCommonFactor(String matriculationNumber) {
+        StringBuilder result = new StringBuilder("Ziffern-Paare mit gemeinsamem Teiler > 1 (Indizes):\n");
+
+        // Konvertieren Sie die Matrikelnummer in ein Array von Ziffern
+        char[] digits = matriculationNumber.toCharArray();
+
+        // Überprüfen Sie, ob es Ziffern mit einem gemeinsamen Teiler > 1 gibt
+        for (int i = 0; i < digits.length - 1; i++) {
+            for (int j = i + 1; j < digits.length; j++) {
+                int digit1 = Character.getNumericValue(digits[i]);
+                int digit2 = Character.getNumericValue(digits[j]);
+
+                // Überprüfen, ob die Ziffern einen gemeinsamen Teiler > 1 haben
+                if (hasCommonFactor(digit1, digit2)) {
+                    result.append("Ziffern ").append(digit1).append(" und ").append(digit2)
+                            .append(" (Indizes ").append(i).append(" und ").append(j).append(")\n");
+                }
+            }
+        }
+
+        return result.toString();
+    }
+
+    private boolean hasCommonFactor(int a, int b) {
+        // Überprüfen, ob die Ziffern selbst oder 1 gemeinsame Teiler haben
+        if (a == b || a == 1 || b == 1) {
+            return false;
+        }
+
+        // Finden Sie den kleineren der beiden Werte
+        int smaller;
+        if (a < b) {
+            smaller = a;
+        } else {
+            smaller = b;
+        }
+
+        // Überprüfen, ob es einen gemeinsamen Teiler größer als 1 gibt
+        for (int i = 2; i <= smaller; i++) {
+            if (a % i == 0 && b % i == 0) {
+                return true;
+            }
+        }
+
+        // Keinen gemeinsamen Teiler gefunden
+        return false;
     }
 
     private void sendToServer(final String matriculationNumber) {
