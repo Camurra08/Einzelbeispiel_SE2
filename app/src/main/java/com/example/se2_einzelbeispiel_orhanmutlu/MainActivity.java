@@ -15,6 +15,10 @@ import androidx.core.view.WindowInsetsCompat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvReceivedData;
     private EditText etStudentnumber;
     private Button btnClientConnect;
-    private String serverName = "se2-submission.aau.at";
-    private int serverPort = 20080;
+    private final String serverName = "se2-submission.aau.at";
+    private final int serverPort = 20080;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +39,53 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public void onClickConnect(View view) {
 
+    public void onClickConnect(View view) {
+        String matriculationNumber = etStudentnumber.getText().toString();
+        sendToServer(matriculationNumber);
+    }
+
+    private void sendToServer(final String matriculationNumber) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Socket socket = new Socket(serverName, serverPort);
+                    Socket socket = new Socket("se2-submission.aau.at", 20080);
 
-                    BufferedReader br_input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    String txtFromServer = br_input.readLine();
+                    // Send matriculation number to server
+                    OutputStream outputStream = socket.getOutputStream();
+                    PrintWriter writer = new PrintWriter(outputStream, true);
+                    writer.println(matriculationNumber);
 
+                    // Receive response from server
+                    InputStreamReader inputStreamReader = new InputStreamReader(socket.getInputStream());
+                    BufferedReader reader = new BufferedReader(inputStreamReader);
+                    final String response = reader.readLine();
+
+                    // Close connections
+                    writer.close();
+                    reader.close();
+                    socket.close();
+
+                    // Update UI on the main thread
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            tvReceivedData.setText(txtFromServer);
+                            tvReceivedData.setText(response);
                         }
                     });
-
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    final String errorMessage = "Error: " + e.getMessage();
+
+                    // Update UI on the main thread
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tvReceivedData.setText(errorMessage);
+                        }
+                    });
                 }
             }
         }).start();
-
-
-
     }
 }

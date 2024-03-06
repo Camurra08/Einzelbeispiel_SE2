@@ -39,8 +39,8 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="117dp"
-        android:layout_marginBottom="366dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="396dp"
         android:text="Antwort vom Server"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="128dp"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="224dp"
         android:onClick="onClickConnect"
         android:text="Abschicken"
         android:textSize="20sp"
@@ -62,11 +62,14 @@
         android:id="@+id/tvRectxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="110dp"
-        android:layout_marginBottom="308dp"
-        android:text="Message from Server"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="388dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="316dp"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
